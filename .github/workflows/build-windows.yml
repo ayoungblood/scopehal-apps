@@ -36,7 +36,7 @@ jobs:
         echo "VULKAN_SDK_VERSION: $VULKAN_SDK_VERSION"
         echo "RUNNER_OS: ${{ runner.os }}"
         echo "GITHUB_JOB: ${{ github.job }}"
-        echo "GITHUB_RUN_NUMBER: ${{ github.run_number
+        echo "GITHUB_RUN_NUMBER: ${{ github.run_number }}"
         python -c "import os; print(os.cpu_count())"
         python -c "import multiprocessing; print(multiprocessing.cpu_count())"
 
