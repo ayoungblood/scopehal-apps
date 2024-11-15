@@ -52,12 +52,24 @@ jobs:
           ffts:p
           hidapi:p
 
+    - name: Install Chocolatey
+      run: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force; `
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
+        iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+    - name: Install WiX Toolset
+      run: |
+        choco install wixtoolset --version=3.14.1 -y
+
     - name: Build
       run: |
         mkdir build
         cd build
         cmake .. -GNinja
         ninja
+        # Create installer using WiX
+        cmake .. -DWIXPATH="C:/Program Files (x86)/WiX Toolset v3.14/bin"
 
     - name: Test
       if: ${{ false }}
