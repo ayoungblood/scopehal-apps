@@ -22,6 +22,7 @@ jobs:
           - { sys: mingw64, env: x86_64 }
           - { sys: ucrt64,  env: ucrt-x86_64 }
           - { sys: clang64, env: clang-x86_64 }
+      fail-fast: false
 
     steps:
     - uses: actions/checkout@v4
