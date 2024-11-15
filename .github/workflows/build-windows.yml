@@ -30,6 +30,18 @@ jobs:
         submodules: recursive
         fetch-depth: 0
 
+    - name: Install Chocolatey
+      shell: pwsh
+      run: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force; `
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
+        iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+    - name: Install WiX Toolset
+      shell: pwsh
+      run: |
+        choco install wixtoolset --version=3.14.1 -y
+
     - uses: msys2/setup-msys2@v2
       with:
         update: true
@@ -53,15 +65,7 @@ jobs:
           ffts:p
           hidapi:p
 
-    - name: Install Chocolatey
-      run: |
-        Set-ExecutionPolicy Bypass -Scope Process -Force; `
-        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
-        iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-    - name: Install WiX Toolset
-      run: |
-        choco install wixtoolset --version=3.14.1 -y
 
     - name: Build
       run: |
