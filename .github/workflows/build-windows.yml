@@ -29,10 +29,6 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
-        persist-credentials: false
-    - run: |
-        git submodule deinit -f --all
-        git submodule update --init --recursive --remote
 
     - uses: msys2/setup-msys2@v2
       with:
